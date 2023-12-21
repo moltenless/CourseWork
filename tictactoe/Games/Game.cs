@@ -69,7 +69,7 @@ public class Game
     public virtual void PlayGame(Session session, PlayerAccount Opponet)
     {
         List<PlayerAccount> gamePlayerList = new List<PlayerAccount>();
-        gamePlayerList.Add(session.PlayerList[0]);
+        gamePlayerList.Add(session.Data.GetAccount(0));
         gamePlayerList.Add(Opponet);
 
         Random rand = new Random();

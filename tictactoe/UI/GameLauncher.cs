@@ -15,9 +15,9 @@ public class GameLauncher
         int index;
         bool ch = int.TryParse(ind, out index);
 
-        if (index == 0) { session.screen.LoginScreen(session); return session.PlayerList.Count - 1; }
+        if (index == 0) { session.screen.LoginScreen(session); return session.Data.GetAccountsCount() - 1; }
 
-        checker.checkPlayerExistence(index, session.PlayerList.Count - 1);
+        checker.checkPlayerExistence(index, session.Data.GetAccountsCount() - 1);
         return index;
     }
 
@@ -52,12 +52,12 @@ public class GameLauncher
             Console.WriteLine("\n\t-- Game with friend!");
             Thread.Sleep(1500);
 
-            if (session.PlayerList.Count < 2 || session.PlayerList.Count < 3 && session.PlayerList[1].UserName == "Computer")
+            if (session.Data.GetAccountsCount() < 2 || session.Data.GetAccountsCount() < 3 && session.Data.GetAccount(1).UserName == "Computer")
             {
                 Console.WriteLine("\t-- To continue second player also need to login!");
                 Thread.Sleep(2500);
                 session.screen.LoginScreen(session);
-                oppIndex = session.PlayerList.Count - 1;
+                oppIndex = session.Data.GetAccountsCount() - 1;
             }
 
             else

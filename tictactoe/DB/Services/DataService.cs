@@ -31,6 +31,13 @@ namespace tictactoe.DB.Services
                 UserName = newAccount.UserName,
             };
 
+            HistoryEntity historyEntity = new HistoryEntity
+            {
+                UserName = account.UserName,
+                History = new List<RecordEntity>()
+            };
+            historyRepository.Create(historyEntity);
+
             accountsRepository.Create(account);
         }
 
@@ -111,7 +118,7 @@ namespace tictactoe.DB.Services
             HistoryEntity historyEntity = historyRepository.Read(userName);
             List<RecordEntity> oldRecords = historyEntity.History;
 
-            List<GameHistory> records = new List<GameHistory>();  
+            List<GameHistory> records = new List<GameHistory>();
             int n = oldRecords.Count;
             for (int i = 0; i < n; i++)
             {

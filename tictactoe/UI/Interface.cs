@@ -89,10 +89,10 @@ public class Interface
 
         Console.WriteLine($"\n\t-- Create new opponent account [Enter 0]");
 
-        for (int i = 1; i < session.PlayerList.Count; i++)
+        for (int i = 1; i < session.Data.GetAccountsCount(); i++)
         {
-            if (session.PlayerList[i].UserName != "Computer")
-            { Console.WriteLine($"\t-- {session.PlayerList[i].UserName} [Enter {i}]"); }
+            if (session.Data.GetAccount(i).UserName != "Computer")
+            { Console.WriteLine($"\t-- {session.Data.GetAccount(i).UserName} [Enter {i}]"); }
         }
     }
 
@@ -101,10 +101,10 @@ public class Interface
         Console.Clear();
         Console.WriteLine("\t\t\t\t\t\t\t\t Choose player to show stats!\n\n");
 
-        for (int i = 0; i < session.PlayerList.Count; i++)
+        for (int i = 0; i < session.Data.GetAccountsCount(); i++)
         {
-            if (session.PlayerList[i].UserName != "Computer")
-            { Console.WriteLine($"\t-- {session.PlayerList[i].UserName} [Enter {i}]"); }
+            if (session.Data.GetAccount(i).UserName != "Computer")
+            { Console.WriteLine($"\t-- {session.Data.GetAccount(i).UserName} [Enter {i}]"); }
         }
 
         Console.Write("\t>> ");
@@ -119,7 +119,7 @@ public class Interface
     public void showPlayerStats(Session session, int ind)
     {
         Console.Clear();
-        session.PlayerList[ind].GetStats();
-        if (session.PlayerList[ind].History.Count != 0) { session.PlayerList[ind].GetGameHistory(); }
+        session.Data.GetAccount(ind).GetStats(); 
+        if (session.Data.GetAccount(ind).History.Count != 0) { session.Data.GetAccount(ind).GetGameHistory(); }
     }
 }
