@@ -46,7 +46,7 @@ namespace tictactoe.DB.Repositories
             return namedHistories.First();
         }
 
-        public void Update(string userName, HistoryEntity entity)
+            public void Update(string userName, HistoryEntity entity)
         {
             HistoryEntity history = Read(userName);
             int index = context.Histories.IndexOf(history);

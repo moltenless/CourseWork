@@ -11,7 +11,7 @@ using TicTacToe;
 
 namespace tictactoe.DB.Services
 {
-    internal class DataService : IAccountService
+    internal class DataService : IAccountService, IHistoryService
     {
         private AccountRepository accountsRepository;
         private HistoryRepository historyRepository;
@@ -66,6 +66,42 @@ namespace tictactoe.DB.Services
                 accounts[i] = GetAccount(old[i].UserName);
             }
             return accounts;
+        }
+
+        public void AddHistory(string userName, GameHistory newHistory)
+        {
+            HistoryEntity historyEntity = historyRepository.Read(userName);
+
+            RecordEntity recordEntity = new RecordEntity
+            {
+                GameID = newHistory.GameID,
+                GameRating = newHistory.GameRating,
+                GameResult = newHistory.GameResult,
+                OpponentName = newHistory.OpponentName,
+            };
+
+            historyEntity.History.Add(recordEntity);
+            historyRepository.Update(userName, historyEntity);
+        }
+
+        public GameHistory[] GetHistory(string userName)
+        {
+            HistoryEntity historyEntity = historyRepository.Read(userName);
+            RecordEntity[] oldRecords = historyEntity.History.ToArray();
+
+            GameHistory[] records = new GameHistory[oldRecords.Length];
+            for (int i = 0; i < records.Length; i++)
+            {
+                records[i] = new GameHistory(oldRecords[i].GameRating, oldRecords[i].OpponentName, oldRecords[i].GameResult);
+            }
+
+            return records;
+        }
+
+        public int GetRecordsCount(string userName)
+        {
+            HistoryEntity historyEntity = historyRepository.Read(userName);
+            return historyEntity.History.Count;
         }
     }
 }
