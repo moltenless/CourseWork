@@ -29,21 +29,22 @@ public class GameLauncher
             Console.WriteLine("\n\n\t-- Game with computer!");
             Thread.Sleep(1500);
 
-            for (int i = 1; i < session.PlayerList.Count; i++)
+            List<PlayerAccount> players = session.Data.GetAllAccounts();
+            for (int i = 1; i < players.Count; i++)
             {
-                if (session.PlayerList[i].UserName == "Computer") { oppIndex = i; break; }
+                if (players[i].UserName == "Computer") { oppIndex = i; break; }
             }
 
             if (oppIndex == 0)
             {
                 PlayerAccount Computer = new PlayerAccount("Computer");
-                session.PlayerList.Add(Computer);
+                session.Data.AddAccount(Computer);
 
-                oppIndex = session.PlayerList.Count - 1;
+                oppIndex = session.Data.GetAccountsCount() - 1;
             }
 
             Game game = new GameWithComputer(1);
-            game.PlayGame(session, session.PlayerList[oppIndex]);
+            game.PlayGame(session, session.Data.GetAccount(oppIndex));
         }
 
         else if (GameType == "/friend")

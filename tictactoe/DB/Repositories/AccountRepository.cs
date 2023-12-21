@@ -57,7 +57,7 @@ namespace tictactoe.DB.Repositories
 
 
 
-        public AccountEntity[] ReadAll() => context.Accounts.ToArray();
+        public List<AccountEntity> ReadAll() => context.Accounts;
 
         public void Update(string userName, AccountEntity entity)
         {

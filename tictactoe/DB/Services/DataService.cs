@@ -76,15 +76,16 @@ namespace tictactoe.DB.Services
             return player;
         }
 
-        public int GetAccountsCount() => accountsRepository.ReadAll().Length;
+        public int GetAccountsCount() => accountsRepository.ReadAll().Count;
 
-        public PlayerAccount[] GetAllAccounts()
+        public List<PlayerAccount> GetAllAccounts()
         {
-            AccountEntity[] old = accountsRepository.ReadAll();
-            PlayerAccount[] accounts = new PlayerAccount[GetAccountsCount()];
-            for (int i = 0; i <  accounts.Length; i++)
+            List<AccountEntity> old = accountsRepository.ReadAll();
+            List<PlayerAccount> accounts = new List<PlayerAccount>();
+            int n = GetAccountsCount();
+            for (int i = 0; i < n; i++)
             {
-                accounts[i] = GetAccount(old[i].UserName);
+                accounts.Add(GetAccount(old[i].UserName));
             }
             return accounts;
         }
@@ -105,15 +106,16 @@ namespace tictactoe.DB.Services
             historyRepository.Update(userName, historyEntity);
         }
 
-        public GameHistory[] GetHistory(string userName)
+        public List<GameHistory> GetHistory(string userName)
         {
             HistoryEntity historyEntity = historyRepository.Read(userName);
-            RecordEntity[] oldRecords = historyEntity.History.ToArray();
+            List<RecordEntity> oldRecords = historyEntity.History;
 
-            GameHistory[] records = new GameHistory[oldRecords.Length];
-            for (int i = 0; i < records.Length; i++)
+            List<GameHistory> records = new List<GameHistory>();  
+            int n = oldRecords.Count;
+            for (int i = 0; i < n; i++)
             {
-                records[i] = new GameHistory(oldRecords[i].GameRating, oldRecords[i].OpponentName, oldRecords[i].GameResult);
+                records.Add(new GameHistory(oldRecords[i].GameRating, oldRecords[i].OpponentName, oldRecords[i].GameResult));
             }
 
             return records;

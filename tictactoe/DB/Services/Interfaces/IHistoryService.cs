@@ -10,7 +10,7 @@ namespace tictactoe.DB.Services.Interfaces
     public interface IHistoryService
     {
         int GetRecordsCount(string userName);
-        GameHistory[] GetHistory(string userName);
+        List<GameHistory> GetHistory(string userName);
         void AddHistory(string  userName, GameHistory newHistory);
     }
 }

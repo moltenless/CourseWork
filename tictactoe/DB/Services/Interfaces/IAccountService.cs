@@ -12,7 +12,7 @@ namespace tictactoe.DB.Services.Interfaces
         PlayerAccount GetAccount(string userName);
         PlayerAccount GetAccount(int id);
         int GetAccountsCount();
-        PlayerAccount[] GetAllAccounts();
+        List<PlayerAccount> GetAllAccounts();
         void AddAccount(PlayerAccount newAccount);
     }
 }
