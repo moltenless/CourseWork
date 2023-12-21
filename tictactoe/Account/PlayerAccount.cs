@@ -1,4 +1,6 @@
+using tictactoe.DB.Services;
 using tictactoe.Games;
+using tictactoe.UI;
 using TicTacToe;
 
 namespace tictactoe.Account;
@@ -8,36 +10,36 @@ public class PlayerAccount
     public string UserName = "";
     public int Rating = 0;
     public int NumberOfGames = 0;
-    public List<GameHistory> History;    //більше не потрібно, воно зберігається в базі даних
+    //public List<GameHistory> History;    більше не потрібно, воно зберігається в базі даних
 
     public PlayerAccount(string UserName = " ", int Rating = 0, int NumberOfGames = 0)
     {
         this.UserName = UserName;
         this.Rating = Rating;
         this.NumberOfGames = NumberOfGames;
-        this.History = new List<GameHistory>();
     }
 
-    public void WinGame(string OpponentName, Game game)
+    public void WinGame(string OpponentName, Game game, DataService data)
     {
         var currentGame = new GameHistory(game.GameRating, OpponentName, "Win");
         Rating += game.GameRating;
-        History.Add(currentGame);
+        data.AddHistory(this.UserName, currentGame);
         NumberOfGames++;
     }
 
-    public void LoseGame(string OpponentName, Game game)
+    public void LoseGame(string OpponentName, Game game, DataService data)
     {
         var currentGame = new GameHistory(-game.GameRating, OpponentName, "Loss");
         Rating -= game.GameRating;
-        History.Add(currentGame);
+        data.AddHistory(this.UserName, currentGame);
         NumberOfGames++;
     }
 
-    public void GetGameHistory()
+    public void GetGameHistory(DataService data)
     {
         Console.WriteLine("\n\t-- Account game history:\n\n");
-        foreach (var elem in History)
+        List<GameHistory> history = data.GetHistory(this.UserName);
+        foreach (var elem in history)
         {
             Console.WriteLine($"\nOpponent Name: {elem.OpponentName}");
             Console.WriteLine($"Game Result: {elem.GameResult}");

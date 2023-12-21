@@ -62,7 +62,7 @@ public class GameLauncher
 
             else
             {
-                session.screen.chooseOpponentInterface(session);
+                session.screen.chooseOpponentInterface(session.Data);
                 oppIndex = chooseFriendOpponent(session);
             }
 

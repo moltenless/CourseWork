@@ -100,6 +100,6 @@ public class Game
         Winner = gamePlayerList[1 - turnIndex];
         Loser = gamePlayerList[turnIndex];
 
-        session.handleGame(this);
+        session.handleGame(this, session.Data);
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using tictactoe.DB.Services;
 using tictactoe.Games;
 namespace tictactoe.UI;
 
@@ -82,17 +83,17 @@ public class Interface
         session.additionalCommand(command);
     }
 
-    public void chooseOpponentInterface(Session session)
+    public void chooseOpponentInterface(DataService data)
     {
         Console.Clear();
         Console.WriteLine("\t\t\t\t\t\t\t\t Choose your opponent!\n\n");
 
         Console.WriteLine($"\n\t-- Create new opponent account [Enter 0]");
 
-        for (int i = 1; i < session.Data.GetAccountsCount(); i++)
+        for (int i = 1; i < data.GetAccountsCount(); i++)
         {
-            if (session.Data.GetAccount(i).UserName != "Computer")
-            { Console.WriteLine($"\t-- {session.Data.GetAccount(i).UserName} [Enter {i}]"); }
+            if (data.GetAccount(i).UserName != "Computer")
+            { Console.WriteLine($"\t-- {data.GetAccount(i).UserName} [Enter {i}]"); }
         }
     }
 
@@ -120,6 +121,6 @@ public class Interface
     {
         Console.Clear();
         session.Data.GetAccount(ind).GetStats(); 
-        if (session.Data.GetAccount(ind).History.Count != 0) { session.Data.GetAccount(ind).GetGameHistory(); }
+        if (session.Data.GetRecordsCount(ind) != 0) { session.Data.GetAccount(ind).GetGameHistory(session.Data); }
     }
 }

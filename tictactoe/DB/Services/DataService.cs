@@ -56,7 +56,7 @@ namespace tictactoe.DB.Services
             {
                 RecordEntity record = history.History[i];
                 GameHistory gameHistory = new GameHistory(record.GameRating, record.OpponentName, record.GameResult);
-                player.History.Add(gameHistory);
+                //player.History.Add(gameHistory);
             }
 
             return player;
@@ -77,7 +77,7 @@ namespace tictactoe.DB.Services
             {
                 RecordEntity record = history.History[i];
                 GameHistory gameHistory = new GameHistory(record.GameRating, record.OpponentName, record.GameResult);
-                player.History.Add(gameHistory);
+                //player.History.Add(gameHistory);
             }
 
             return player;
@@ -131,6 +131,12 @@ namespace tictactoe.DB.Services
         public int GetRecordsCount(string userName)
         {
             HistoryEntity historyEntity = historyRepository.Read(userName);
+            return historyEntity.History.Count;
+        }
+
+        public int GetRecordsCount(int id)
+        {
+            HistoryEntity historyEntity = historyRepository.Read(id);
             return historyEntity.History.Count;
         }
     }

@@ -39,14 +39,14 @@ public class Session
         else { endSession(); }
     }
 
-    public void handleGame(Game game)
+    public void handleGame(Game game, DataService data)
     {
         Console.Write("\n\n\t-- Game is over!\n\t-- Game result: ");
         if (game.gameStatus == true) { Console.WriteLine($"{game.Winner.UserName} won 😀"); }
         else { Console.WriteLine("Draw 🙄"); }
 
-        game.Winner.WinGame(game.Loser.UserName, game);
-        game.Loser.LoseGame(game.Winner.UserName, game);
+        game.Winner.WinGame(game.Loser.UserName, game, data);
+        game.Loser.LoseGame(game.Winner.UserName, game, data);
 
         screen.backToMenu(this);
     }

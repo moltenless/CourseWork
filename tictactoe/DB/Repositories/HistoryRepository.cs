@@ -46,6 +46,13 @@ namespace tictactoe.DB.Repositories
             return namedHistories.First();
         }
 
+        public HistoryEntity Read(int id)
+        {
+            if (id >= context.Histories.Count) 
+                new ArgumentException("There are not histories with this account's user name");
+            return context.Histories[id];
+        }
+
         public void Update(string userName, HistoryEntity entity)
         {
             HistoryEntity history = Read(userName);
