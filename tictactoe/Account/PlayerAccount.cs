@@ -10,7 +10,6 @@ public class PlayerAccount
     public string UserName = "";
     public int Rating = 0;
     public int NumberOfGames = 0;
-    //public List<GameHistory> History;    більше не потрібно, воно зберігається в базі даних
 
     public PlayerAccount(string UserName = " ", int Rating = 0, int NumberOfGames = 0)
     {
@@ -25,6 +24,7 @@ public class PlayerAccount
         Rating += game.GameRating;
         data.AddHistory(this.UserName, currentGame);
         NumberOfGames++;
+        data.UpdateAccount(UserName, this);
     }
 
     public void LoseGame(string OpponentName, Game game, int id, DataService data)
@@ -33,6 +33,7 @@ public class PlayerAccount
         Rating -= game.GameRating;
         data.AddHistory(this.UserName, currentGame);
         NumberOfGames++;
+        data.UpdateAccount(UserName, this);
     }
 
     public void GetGameHistory(DataService data)
@@ -48,12 +49,11 @@ public class PlayerAccount
         }
     }
 
-    public void GetStats()
+    public void GetStats(PlayerAccount account, DataService data)
     {
         Console.WriteLine("\t-- Account stats:\n\n");
-
-        Console.WriteLine($"\t-- UserName: {UserName}");
-        Console.WriteLine($"\t-- Rating: {Rating}");
-        Console.WriteLine($"\t-- Games played: {NumberOfGames}");
+        Console.WriteLine($"\t-- UserName: {account.UserName}");
+        Console.WriteLine($"\t-- Rating: {account.Rating}");
+        Console.WriteLine($"\t-- Games played: {account.NumberOfGames}");
     }
 }

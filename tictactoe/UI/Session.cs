@@ -10,7 +10,6 @@ namespace tictactoe.UI;
 public class Session
 {
     public Interface screen { get; set; } = new Interface();
-    //public List<PlayerAccount> PlayerList = new List<PlayerAccount>();  це більше не потрібно, замість нього рядок нижче
     public DataService Data { get; set; }
     public GameLauncher launcher { get; set; } = new GameLauncher();
 

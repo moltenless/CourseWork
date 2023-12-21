@@ -17,6 +17,4 @@ public class GameHistory
         this.GameID = GameID;
 
     } 
-
-
 }

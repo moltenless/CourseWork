@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using tictactoe.Account;
 using tictactoe.DB.Services;
 using tictactoe.Games;
 namespace tictactoe.UI;
@@ -120,7 +121,8 @@ public class Interface
     public void showPlayerStats(Session session, int ind)
     {
         Console.Clear();
-        session.Data.GetAccount(ind).GetStats(); 
+        PlayerAccount current = session.Data.GetAccount(ind);
+        current.GetStats(current, session.Data); 
         if (session.Data.GetRecordsCount(ind) != 0) { session.Data.GetAccount(ind).GetGameHistory(session.Data); }
     }
 }

@@ -15,11 +15,14 @@ namespace tictactoe.DB.Services
     {
         private AccountRepository accountsRepository;
         private HistoryRepository historyRepository;
+        public DBContext Context { get; set; }
 
         public DataService(DBContext context)
         {
             accountsRepository = new AccountRepository(context);
             historyRepository = new HistoryRepository(context);
+
+            this.Context = context;
         }
 
         public void AddAccount(PlayerAccount newAccount)
@@ -41,6 +44,18 @@ namespace tictactoe.DB.Services
             accountsRepository.Create(account);
         }
 
+        public void UpdateAccount(string userName, PlayerAccount account)
+        {
+            AccountEntity entity = new AccountEntity
+            {
+                NumberOfGames = account.NumberOfGames,
+                Rating = account.Rating,
+                UserName = account.UserName,
+            };
+
+            accountsRepository.Update(userName, entity);
+        }
+
         public PlayerAccount GetAccount(string userName)
         {
             AccountEntity account = accountsRepository.Read(userName);
@@ -56,7 +71,6 @@ namespace tictactoe.DB.Services
             {
                 RecordEntity record = history.History[i];
                 GameHistory gameHistory = new GameHistory(record.GameRating, record.OpponentName, record.GameResult, record.GameID);
-                //player.History.Add(gameHistory);
             }
 
             return player;
@@ -77,7 +91,6 @@ namespace tictactoe.DB.Services
             {
                 RecordEntity record = history.History[i];
                 GameHistory gameHistory = new GameHistory(record.GameRating, record.OpponentName, record.GameResult, record.GameID);
-                //player.History.Add(gameHistory);
             }
 
             return player;
