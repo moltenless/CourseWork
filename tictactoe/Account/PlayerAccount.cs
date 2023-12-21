@@ -19,17 +19,17 @@ public class PlayerAccount
         this.NumberOfGames = NumberOfGames;
     }
 
-    public void WinGame(string OpponentName, Game game, DataService data)
+    public void WinGame(string OpponentName, Game game, int id, DataService data)
     {
-        var currentGame = new GameHistory(game.GameRating, OpponentName, "Win");
+        var currentGame = new GameHistory(game.GameRating, OpponentName, "Win", id);
         Rating += game.GameRating;
         data.AddHistory(this.UserName, currentGame);
         NumberOfGames++;
     }
 
-    public void LoseGame(string OpponentName, Game game, DataService data)
+    public void LoseGame(string OpponentName, Game game, int id, DataService data)
     {
-        var currentGame = new GameHistory(-game.GameRating, OpponentName, "Loss");
+        var currentGame = new GameHistory(-game.GameRating, OpponentName, "Loss", id);
         Rating -= game.GameRating;
         data.AddHistory(this.UserName, currentGame);
         NumberOfGames++;

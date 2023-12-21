@@ -55,7 +55,7 @@ namespace tictactoe.DB.Services
             for (int i = 0; i < history.History.Count; i++)
             {
                 RecordEntity record = history.History[i];
-                GameHistory gameHistory = new GameHistory(record.GameRating, record.OpponentName, record.GameResult);
+                GameHistory gameHistory = new GameHistory(record.GameRating, record.OpponentName, record.GameResult, record.GameID);
                 //player.History.Add(gameHistory);
             }
 
@@ -76,7 +76,7 @@ namespace tictactoe.DB.Services
             for (int i = 0; i < history.History.Count; i++)
             {
                 RecordEntity record = history.History[i];
-                GameHistory gameHistory = new GameHistory(record.GameRating, record.OpponentName, record.GameResult);
+                GameHistory gameHistory = new GameHistory(record.GameRating, record.OpponentName, record.GameResult, record.GameID);
                 //player.History.Add(gameHistory);
             }
 
@@ -122,7 +122,7 @@ namespace tictactoe.DB.Services
             int n = oldRecords.Count;
             for (int i = 0; i < n; i++)
             {
-                records.Add(new GameHistory(oldRecords[i].GameRating, oldRecords[i].OpponentName, oldRecords[i].GameResult));
+                records.Add(new GameHistory(oldRecords[i].GameRating, oldRecords[i].OpponentName, oldRecords[i].GameResult, oldRecords[i].GameID));
             }
 
             return records;

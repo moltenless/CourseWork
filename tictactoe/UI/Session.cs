@@ -2,6 +2,7 @@ using tictactoe.Account;
 using tictactoe.DB;
 using tictactoe.DB.Services;
 using tictactoe.Games;
+using TicTacToe;
 
 namespace tictactoe.UI;
 
@@ -45,8 +46,11 @@ public class Session
         if (game.gameStatus == true) { Console.WriteLine($"{game.Winner.UserName} won 😀"); }
         else { Console.WriteLine("Draw 🙄"); }
 
-        game.Winner.WinGame(game.Loser.UserName, game, data);
-        game.Loser.LoseGame(game.Winner.UserName, game, data);
+        
+        game.Winner.WinGame(game.Loser.UserName, game, (GameHistory.GameIDCounter + 1) / 2, data);
+        GameHistory.GameIDCounter++;
+        game.Loser.LoseGame(game.Winner.UserName, game, (GameHistory.GameIDCounter + 1) / 2, data);
+        GameHistory.GameIDCounter++;
 
         screen.backToMenu(this);
     }
