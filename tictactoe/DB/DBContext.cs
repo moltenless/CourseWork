@@ -17,5 +17,10 @@ namespace tictactoe.DB
             Accounts = new List<AccountEntity>();
             Histories = new List<HistoryEntity>();
         }
+
+        public static DBContext GetDummyContext()
+        {
+            return new DBContext();
+        }
     }
 }

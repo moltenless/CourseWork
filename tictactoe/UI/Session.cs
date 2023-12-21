@@ -1,4 +1,5 @@
 using tictactoe.Account;
+using tictactoe.DB;
 using tictactoe.DB.Services;
 using tictactoe.Games;
 
@@ -14,6 +15,7 @@ public class Session
 
     public void StartSession()
     {
+        this.Data = new DataService(DBContext.GetDummyContext());
         screen.LoginScreen(this);
         screen.MenuScreen(this);
     }
