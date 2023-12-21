@@ -23,7 +23,7 @@ public class Session
     public void addPlayer(string username, int rating, int games_num)
     {
         PlayerAccount Player = new PlayerAccount(username, rating, games_num);
-        PlayerList.Add(Player);
+        Data.AddAccount(Player);
     }
     public void menuCommand(string command = "")
     {

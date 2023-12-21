@@ -47,6 +47,16 @@ namespace tictactoe.DB.Repositories
             return namedAccounts.First();
         }
 
+        public AccountEntity Read(int id)
+        {
+            if (context.Accounts.Count >= id)
+                throw new ArgumentException("There are not accounts with this user name");
+
+            return context.Accounts[id];
+        }
+
+
+
         public AccountEntity[] ReadAll() => context.Accounts.ToArray();
 
         public void Update(string userName, AccountEntity entity)

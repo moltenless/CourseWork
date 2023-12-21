@@ -10,6 +10,7 @@ namespace tictactoe.DB.Services.Interfaces
     public interface IAccountService
     {
         PlayerAccount GetAccount(string userName);
+        PlayerAccount GetAccount(int id);
         int GetAccountsCount();
         PlayerAccount[] GetAllAccounts();
         void AddAccount(PlayerAccount newAccount);

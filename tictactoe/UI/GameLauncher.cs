@@ -66,7 +66,7 @@ public class GameLauncher
             }
 
             Game game = new GameWithFriend(1);
-            game.PlayGame(session, session.PlayerList[oppIndex]);
+            game.PlayGame(session, session.Data.GetAccount(oppIndex));
         }
     }
 }

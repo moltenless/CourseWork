@@ -55,6 +55,27 @@ namespace tictactoe.DB.Services
             return player;
         }
 
+        public PlayerAccount GetAccount(int id)
+        {
+            AccountEntity account = accountsRepository.Read(id);
+            PlayerAccount player = new PlayerAccount
+            {
+                NumberOfGames = account.NumberOfGames,
+                Rating = account.Rating,
+                UserName = account.UserName,
+            };
+
+            HistoryEntity history = historyRepository.Read(account.UserName);
+            for (int i = 0; i < history.History.Count; i++)
+            {
+                RecordEntity record = history.History[i];
+                GameHistory gameHistory = new GameHistory(record.GameRating, record.OpponentName, record.GameResult);
+                player.History.Add(gameHistory);
+            }
+
+            return player;
+        }
+
         public int GetAccountsCount() => accountsRepository.ReadAll().Length;
 
         public PlayerAccount[] GetAllAccounts()
