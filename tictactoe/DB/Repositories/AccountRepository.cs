@@ -49,7 +49,7 @@ namespace tictactoe.DB.Repositories
 
         public AccountEntity Read(int id)
         {
-            if (context.Accounts.Count >= id)
+            if (id >= context.Accounts.Count)
                 throw new ArgumentException("There are not accounts with this user name");
 
             return context.Accounts[id];

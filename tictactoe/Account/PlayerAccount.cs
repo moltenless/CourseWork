@@ -8,7 +8,7 @@ public class PlayerAccount
     public string UserName = "";
     public int Rating = 0;
     public int NumberOfGames = 0;
-    public List<GameHistory> History;
+    public List<GameHistory> History;    //більше не потрібно, воно зберігається в базі даних
 
     public PlayerAccount(string UserName = " ", int Rating = 0, int NumberOfGames = 0)
     {
