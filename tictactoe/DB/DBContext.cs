@@ -7,7 +7,7 @@ using tictactoe.DB.Entities;
 
 namespace tictactoe.DB
 {
-    internal class DBContext
+    public class DBContext
     {
         public List<AccountEntity> Accounts { get; set; }
         public List<HistoryEntity> Histories { get; set; }

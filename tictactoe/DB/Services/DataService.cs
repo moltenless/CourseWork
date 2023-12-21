@@ -11,7 +11,7 @@ using TicTacToe;
 
 namespace tictactoe.DB.Services
 {
-    internal class DataService : IAccountService, IHistoryService
+    public class DataService : IAccountService, IHistoryService
     {
         private AccountRepository accountsRepository;
         private HistoryRepository historyRepository;

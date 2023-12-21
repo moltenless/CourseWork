@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace tictactoe.DB.Entities
 {
-    internal class HistoryEntity
+    public class HistoryEntity
     {
         public string UserName { get; set; }
         public List<RecordEntity> History { get; set; }

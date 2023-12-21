@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace tictactoe.DB.Entities
 {
-    internal class RecordEntity
+    public class RecordEntity
     {
         public int GameRating { get; set; }
         public string OpponentName { get; set; }

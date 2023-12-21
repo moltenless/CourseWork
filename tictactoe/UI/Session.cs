@@ -1,4 +1,5 @@
 using tictactoe.Account;
+using tictactoe.DB.Services;
 using tictactoe.Games;
 
 namespace tictactoe.UI;
@@ -6,9 +7,10 @@ namespace tictactoe.UI;
 
 public class Session
 {
-    public Interface screen = new Interface();
-    public List<PlayerAccount> PlayerList = new List<PlayerAccount>();
-    public GameLauncher launcher = new GameLauncher();
+    public Interface screen { get; set; } = new Interface();
+    //public List<PlayerAccount> PlayerList = new List<PlayerAccount>();  це більше не потрібно, замість нього рядок нижче
+    public DataService Data { get; set; }
+    public GameLauncher launcher { get; set; } = new GameLauncher();
 
     public void StartSession()
     {

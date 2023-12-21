@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace tictactoe.DB.Entities
 {
-    internal class AccountEntity
+    public class AccountEntity
     {
         public string UserName { get; set; }
         public int Rating { get; set; }
