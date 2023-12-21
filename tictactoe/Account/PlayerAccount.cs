@@ -8,13 +8,14 @@ public class PlayerAccount
     public string UserName = "";
     public int Rating = 0;
     public int NumberOfGames = 0;
-    public List<GameHistory> History = new List<GameHistory>();
+    public List<GameHistory> History;
 
     public PlayerAccount(string UserName = " ", int Rating = 0, int NumberOfGames = 0)
     {
         this.UserName = UserName;
         this.Rating = Rating;
         this.NumberOfGames = NumberOfGames;
+        this.History = new List<GameHistory>();
     }
 
     public void WinGame(string OpponentName, Game game)

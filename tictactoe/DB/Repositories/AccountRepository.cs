@@ -47,6 +47,8 @@ namespace tictactoe.DB.Repositories
             return namedAccounts.First();
         }
 
+        public AccountEntity[] ReadAll() => context.Accounts.ToArray();
+
         public void Update(string userName, AccountEntity entity)
         {
             AccountEntity account = Read(userName);
