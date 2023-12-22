@@ -14,5 +14,6 @@ namespace tictactoe.DB.Services.Interfaces
         int GetAccountsCount();
         List<PlayerAccount> GetAllAccounts();
         void AddAccount(PlayerAccount newAccount);
+        void UpdateAccount(string userName, PlayerAccount account);
     }
 }

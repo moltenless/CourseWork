@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using tictactoe.Account;
+﻿using tictactoe.Account;
 using tictactoe.DB.Entities;
 using tictactoe.DB.Repositories;
 using tictactoe.DB.Services.Interfaces;
@@ -65,14 +60,6 @@ namespace tictactoe.DB.Services
                 Rating = account.Rating,
                 UserName = account.UserName,
             };
-
-            HistoryEntity history = historyRepository.Read(userName);
-            for (int i = 0; i < history.History.Count; i++)
-            {
-                RecordEntity record = history.History[i];
-                GameHistory gameHistory = new GameHistory(record.GameRating, record.OpponentName, record.GameResult, record.GameID);
-            }
-
             return player;
         }
 
@@ -85,14 +72,6 @@ namespace tictactoe.DB.Services
                 Rating = account.Rating,
                 UserName = account.UserName,
             };
-
-            HistoryEntity history = historyRepository.Read(account.UserName);
-            for (int i = 0; i < history.History.Count; i++)
-            {
-                RecordEntity record = history.History[i];
-                GameHistory gameHistory = new GameHistory(record.GameRating, record.OpponentName, record.GameResult, record.GameID);
-            }
-
             return player;
         }
 

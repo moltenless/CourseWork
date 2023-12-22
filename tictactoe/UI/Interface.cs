@@ -84,17 +84,17 @@ public class Interface
         session.additionalCommand(command);
     }
 
-    public void chooseOpponentInterface(DataService data)
+    public void chooseOpponentInterface(Session session)
     {
         Console.Clear();
         Console.WriteLine("\t\t\t\t\t\t\t\t Choose your opponent!\n\n");
 
         Console.WriteLine($"\n\t-- Create new opponent account [Enter 0]");
 
-        for (int i = 1; i < data.GetAccountsCount(); i++)
+        for (int i = 1; i < session.AccountService.GetAccountsCount(); i++)
         {
-            if (data.GetAccount(i).UserName != "Computer")
-            { Console.WriteLine($"\t-- {data.GetAccount(i).UserName} [Enter {i}]"); }
+            if (session.AccountService.GetAccount(i).UserName != "Computer")
+            { Console.WriteLine($"\t-- {session.AccountService.GetAccount(i).UserName} [Enter {i}]"); }
         }
     }
 
@@ -103,10 +103,10 @@ public class Interface
         Console.Clear();
         Console.WriteLine("\t\t\t\t\t\t\t\t Choose player to show stats!\n\n");
 
-        for (int i = 0; i < session.Data.GetAccountsCount(); i++)
+        for (int i = 0; i < session.AccountService.GetAccountsCount(); i++)
         {
-            if (session.Data.GetAccount(i).UserName != "Computer")
-            { Console.WriteLine($"\t-- {session.Data.GetAccount(i).UserName} [Enter {i}]"); }
+            if (session.AccountService.GetAccount(i).UserName != "Computer")
+            { Console.WriteLine($"\t-- {session.AccountService.GetAccount(i).UserName} [Enter {i}]"); }
         }
 
         Console.Write("\t>> ");
@@ -121,8 +121,8 @@ public class Interface
     public void showPlayerStats(Session session, int ind)
     {
         Console.Clear();
-        PlayerAccount current = session.Data.GetAccount(ind);
-        current.GetStats(current, session.Data); 
-        if (session.Data.GetRecordsCount(ind) != 0) { session.Data.GetAccount(ind).GetGameHistory(session.Data); }
+        PlayerAccount current = session.AccountService.GetAccount(ind);
+        current.GetStats(current); 
+        if (session.HistoryService.GetRecordsCount(ind) != 0) { session.AccountService.GetAccount(ind).GetGameHistory(session); }
     }
 }

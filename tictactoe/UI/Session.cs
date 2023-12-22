@@ -1,6 +1,7 @@
 using tictactoe.Account;
 using tictactoe.DB;
 using tictactoe.DB.Services;
+using tictactoe.DB.Services.Interfaces;
 using tictactoe.Games;
 using TicTacToe;
 
@@ -9,13 +10,19 @@ namespace tictactoe.UI;
 
 public class Session
 {
-    public Interface screen { get; set; } = new Interface();
-    public DataService Data { get; set; }
-    public GameLauncher launcher { get; set; } = new GameLauncher();
+    public IAccountService AccountService { get; }
+    public IHistoryService HistoryService { get; }
+    public Interface screen { get; } = new Interface();
+    public GameLauncher launcher { get; } = new GameLauncher();
+
+    public Session(IAccountService accountService, IHistoryService historyService)
+    {
+        this.AccountService = accountService;
+        this.HistoryService = historyService;
+    }
 
     public void StartSession()
     {
-        this.Data = new DataService(DBContext.GetDummyContext());
         screen.LoginScreen(this);
         screen.MenuScreen(this);
     }
@@ -23,8 +30,9 @@ public class Session
     public void addPlayer(string username, int rating, int games_num)
     {
         PlayerAccount Player = new PlayerAccount(username, rating, games_num);
-        Data.AddAccount(Player);
+        AccountService.AddAccount(Player);
     }
+
     public void menuCommand(string command = "")
     {
         if (command == "/computer" || command == "/friend") { launcher.Launch(this, command); }
@@ -39,16 +47,15 @@ public class Session
         else { endSession(); }
     }
 
-    public void handleGame(Game game, DataService data)
+    public void handleGame(Game game)
     {
         Console.Write("\n\n\t-- Game is over!\n\t-- Game result: ");
         if (game.gameStatus == true) { Console.WriteLine($"{game.Winner.UserName} won 😀"); }
         else { Console.WriteLine("Draw 🙄"); }
 
-        
-        game.Winner.WinGame(game.Loser.UserName, game, (GameHistory.GameIDCounter + 1) / 2, data);
+        game.Winner.WinGame(game.Loser.UserName, game, (GameHistory.GameIDCounter + 1) / 2, this);
         GameHistory.GameIDCounter++;
-        game.Loser.LoseGame(game.Winner.UserName, game, (GameHistory.GameIDCounter + 1) / 2, data);
+        game.Loser.LoseGame(game.Winner.UserName, game, (GameHistory.GameIDCounter + 1) / 2, this);
         GameHistory.GameIDCounter++;
 
         screen.backToMenu(this);

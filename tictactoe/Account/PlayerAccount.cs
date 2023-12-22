@@ -1,4 +1,5 @@
 using tictactoe.DB.Services;
+using tictactoe.DB.Services.Interfaces;
 using tictactoe.Games;
 using tictactoe.UI;
 using TicTacToe;
@@ -18,28 +19,28 @@ public class PlayerAccount
         this.NumberOfGames = NumberOfGames;
     }
 
-    public void WinGame(string OpponentName, Game game, int id, DataService data)
+    public void WinGame(string OpponentName, Game game, int id, Session session)
     {
         var currentGame = new GameHistory(game.GameRating, OpponentName, "Win", id);
         Rating += game.GameRating;
-        data.AddHistory(this.UserName, currentGame);
+        session.HistoryService.AddHistory(this.UserName, currentGame);
         NumberOfGames++;
-        data.UpdateAccount(UserName, this);
+        session.AccountService.UpdateAccount(UserName, this);
     }
 
-    public void LoseGame(string OpponentName, Game game, int id, DataService data)
+    public void LoseGame(string OpponentName, Game game, int id, Session session)
     {
         var currentGame = new GameHistory(-game.GameRating, OpponentName, "Loss", id);
         Rating -= game.GameRating;
-        data.AddHistory(this.UserName, currentGame);
+        session.HistoryService.AddHistory(this.UserName, currentGame);
         NumberOfGames++;
-        data.UpdateAccount(UserName, this);
+        session.AccountService.UpdateAccount(UserName, this);
     }
 
-    public void GetGameHistory(DataService data)
+    public void GetGameHistory(Session session)
     {
         Console.WriteLine("\n\t-- Account game history:\n\n");
-        List<GameHistory> history = data.GetHistory(this.UserName);
+        List<GameHistory> history = session.HistoryService.GetHistory(this.UserName);
         foreach (var elem in history)
         {
             Console.WriteLine($"\nOpponent Name: {elem.OpponentName}");
@@ -49,11 +50,16 @@ public class PlayerAccount
         }
     }
 
-    public void GetStats(PlayerAccount account, DataService data)
+    public void GetStats(PlayerAccount account)
     {
         Console.WriteLine("\t-- Account stats:\n\n");
         Console.WriteLine($"\t-- UserName: {account.UserName}");
         Console.WriteLine($"\t-- Rating: {account.Rating}");
         Console.WriteLine($"\t-- Games played: {account.NumberOfGames}");
+    }
+
+    internal void WinGame(string userName, Game game, int v, object historyService, object accountService)
+    {
+        throw new NotImplementedException();
     }
 }

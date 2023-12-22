@@ -1,6 +1,7 @@
 namespace tictactoe.Games;
 using System;
 using tictactoe.Account;
+using tictactoe.DB.Services.Interfaces;
 using tictactoe.UI;
 
 public class Game
@@ -44,7 +45,6 @@ public class Game
             Console.WriteLine("\n\t-- This position has been already chosen! Try another one)");
         }
 
-        //Console.WriteLine($"\tPosition: [{row}][{col}]"); 
         Board[row, col] = index;
     }
 
@@ -69,7 +69,7 @@ public class Game
     public virtual void PlayGame(Session session, PlayerAccount Opponet)
     {
         List<PlayerAccount> gamePlayerList = new List<PlayerAccount>();
-        gamePlayerList.Add(session.Data.GetAccount(0));
+        gamePlayerList.Add(session.AccountService.GetAccount(0));
         gamePlayerList.Add(Opponet);
 
         Random rand = new Random();
@@ -100,6 +100,6 @@ public class Game
         Winner = gamePlayerList[1 - turnIndex];
         Loser = gamePlayerList[turnIndex];
 
-        session.handleGame(this, session.Data);
+        session.handleGame(this);
     }
 }
