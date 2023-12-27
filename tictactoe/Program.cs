@@ -12,10 +12,9 @@ namespace tictactoe
             try
             {
                 DBContext dbContext = DBContext.GetDummyContext();
-                DataService dataService = new DataService(dbContext);
 
-                IAccountService accountService = (IAccountService)dataService;
-                IHistoryService historyService = (IHistoryService)dataService;
+                IAccountService accountService = (IAccountService)new AccountService(dbContext);
+                IHistoryService historyService = (IHistoryService)new HistoryService(dbContext);
 
                 Session session = new Session(accountService, historyService);
                 session.StartSession();

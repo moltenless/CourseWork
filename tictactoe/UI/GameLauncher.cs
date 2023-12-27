@@ -17,7 +17,6 @@ public class GameLauncher
 
         if (index == 0) { session.screen.LoginScreen(session); return session.AccountService.GetAccountsCount() - 1; }
 
-        checker.checkPlayerExistence(index, session.AccountService.GetAccountsCount() - 1);
         return index;
     }
 
